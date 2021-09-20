@@ -1,0 +1,69 @@
+
+ 
+ <html>
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"> 
+
+
+<head>
+
+
+</head>
+
+
+<body>
+
+<div class="wrapper">    
+
+<div id="block1">    
+<form action="/busquedaPeliculas/" method="GET">
+
+    <input type="text" name="textoBusqueda">
+
+    <input type="submit" value="Buscar">
+
+</form>
+
+
+<form action="/busquedaPeliculas/" method="GET">
+
+{% if infoPelis %}    
+{% for peli in infoPelis %}
+
+<fieldset>
+    <input type="checkbox" id="checkbox_generic" name="imdbID" value={{peli.imdbID}}>
+    <label for="huey">{{peli.nombre}}</label>
+</fieldset>
+
+{% endfor %}
+{% else %}
+
+<p><strong> El texto de búsqueda pudo haber generado demasiados resultados o ninguno </strong></p>
+
+{% endif %}
+
+<input type="submit" value="Votar">
+
+</form>
+
+</div>
+
+<div id="block2">
+
+<p><strong> Los tres primeros puestos son:</strong></p>
+
+{% for puntero in podioList.1 %}
+<p>{{puntero.1}} {{puntero.0.nombre}}</p>
+{% endfor %}
+
+<p><strong> Votos totales: {{podioList.0}}</strong></p>
+
+</div>
+
+</div>
+
+</body>
+
+
+ </html>
